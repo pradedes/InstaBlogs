@@ -1,36 +1,50 @@
 package com.instablog.api.entity;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.instablog.util.BloggingConstants;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = BloggingConstants.FIND_ALL, query = "SELECT b FROM Blog b") ,
+@NamedQuery(name = BloggingConstants.FIND_BY_BLOGID, query = "SELECT b FROM Blog b where b.blogId=:blogId"),
+@NamedQuery(name = BloggingConstants.FIND_BY_BLOGGERID, query = "SELECT b FROM Blog b where b.noOfviews=:bloggerId"),
+@NamedQuery(name = BloggingConstants.FIND_BY_BLOGGERCONTENT, query = "SELECT b from Blog b where b.blogBody like :searchString")})
 public class Blog {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int blogId;
+	
+	
 	
 	private String blogTitle;
 	
+	@Column(length=5000)
 	private String blogBody;
 	
-	private int noOfviews;
 	
+	private String noOfviews;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date blogCreatedDate;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private User blogger;
+	@ManyToOne
+	private User user;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Comment> comments;
-	
-	private List<String> blogHashTags;
+/*	 @ElementCollection(targetClass=String.class)
+	private List<String> blogHashTags;*/
 
 	public int getBlogId() {
 		return blogId;
@@ -56,11 +70,11 @@ public class Blog {
 		this.blogBody = blogBody;
 	}
 
-	public int getNoOfviews() {
+	public String getNoOfviews() {
 		return noOfviews;
 	}
 
-	public void setNoOfviews(int noOfviews) {
+	public void setNoOfviews(String noOfviews) {
 		this.noOfviews = noOfviews;
 	}
 
@@ -72,28 +86,21 @@ public class Blog {
 		this.blogCreatedDate = blogCreatedDate;
 	}
 
-	public User getBlogger() {
-		return blogger;
+	public User getUser() {
+		return user;
 	}
 
-	public void setBlogger(User blogger) {
-		this.blogger = blogger;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
-	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public List<String> getBlogHashTags() {
+/*	public List<String> getBlogHashTags() {
 		return blogHashTags;
 	}
 
 	public void setBlogHashTags(List<String> hashTags) {
 		this.blogHashTags = hashTags;
-	}
+	}*/
 	
 }

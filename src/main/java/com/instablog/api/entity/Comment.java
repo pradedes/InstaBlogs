@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -11,14 +13,29 @@ import javax.persistence.OneToOne;
 public class Comment {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int commentId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private User blogger;
+	private int bloggerId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private Blog blogId;
+	private int blogId;
 	
+	public int getBloggerId() {
+		return bloggerId;
+	}
+
+	public void setBloggerId(int bloggerId) {
+		this.bloggerId = bloggerId;
+	}
+
+	public int getBlogId() {
+		return blogId;
+	}
+
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
+
 	private String commentDetails;
 	
 	private Date commentedDate;
@@ -33,21 +50,6 @@ public class Comment {
 		this.commentId = commentId;
 	}
 
-	public User getBlogger() {
-		return blogger;
-	}
-
-	public void setBlogger(User blogger) {
-		this.blogger = blogger;
-	}
-
-	public Blog getBlogId() {
-		return blogId;
-	}
-
-	public void setBlogId(Blog blogId) {
-		this.blogId = blogId;
-	}
 
 	public String getCommentDetails() {
 		return commentDetails;

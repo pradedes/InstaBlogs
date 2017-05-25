@@ -13,7 +13,7 @@ public interface BlogService {
 
 	public void editBlog(Blog b) throws BloggingException;
 
-	public List<Blog> searchBlog(int searcType,String searchStr)
+	public List<Blog> searchBlog(int searcType,int searchInt, String searchStr)
 	 throws NoBlogFoundException, BloggingException;
 
 }

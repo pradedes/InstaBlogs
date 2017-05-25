@@ -1,42 +1,65 @@
 package com.instablog.api.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u ORDER BY u.userLoginId DESC"), })
 public class User {
+
+	public static final String FIND_ALL = "User.findAll";
+
+	// @Column("length=10","nonnullable = true")
+	
 	@Id
-	//@Column("length=10","nonnullable = true")
-	private String userId;
-	
-	private String userName;
-	
-	private boolean isAdmin;
-	
+	//@Column(name = "USER_LOGIN_ID")
+	private String userLoginId;
+
+
+	@Column(name = "FULL_NAME")
+	private String fullName;
+
+	// private boolean isAdmin;
+	@Column(name = "E_MAIL")
 	private String email;
+
+	// @Column("length=256","nonnullable = true")
+	@Column(name = "PWD_HASH")
+	private String password;
 	
-	//@Column("length=256","nonnullable = true")
-	private String passwordHash;
+	@Column(name = "SALT")
+	private String salt;
 	
-	private List<String> userHashTags;
-	
-	public List<String> getUserHashTags() {
-		return userHashTags;
+	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//// @JoinTable(name = "USER_HASHTAGS", joinColumns = { @JoinColumn(name =
+	// "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "VALUE") })
+	// private Set<HashTag> userHashTags;
+	//
+	// public Set<HashTag> getUserHashTags() {
+	// return userHashTags;
+	// }
+	//
+	// public void setUserHashTags(Set<HashTag> userHashTags) {
+	// this.userHashTags = userHashTags;
+	// }
+
+	// public boolean isAdmin() {
+	// return isAdmin;
+	// }
+	//
+	// public void setAdmin(boolean isAdmin) {
+	// this.isAdmin = isAdmin;
+	// }
+
+	public String getSalt() {
+		return salt;
 	}
 
-	public void setUserHashTags(List<String> userHashTags) {
-		this.userHashTags = userHashTags;
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public String getEmail() {
@@ -47,33 +70,28 @@ public class User {
 		this.email = email;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public String getPassword() {
+		return password;
 	}
 
-
-	public String getPasswordHash() {
-		return passwordHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public String getUserName() {
-		return userName;
+		return fullName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String fullName) {
+		this.fullName = fullName;
+	}
+	
+	public String getUserLoginId() {
+		return userLoginId;
 	}
 
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
+	}
 }

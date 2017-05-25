@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iNSTAbLOG</title>
+<link href="library.css" rel="stylesheet" />
+<script src="jquery-2.1.3.js"></script>
+<script src="homePage.js"></script>
+<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
+
+</head>
+<body>
+	<h1 align="center"> InstaBlog</h1>
+	
+	<hr />
+	<hr />
+	<div id='startLine' align= "right">
+		<table>
+			<tr >
+				<td align="right"><input type="text" size="100" id='search' placeholder="search"/></td>
+				<td></td>
+				<td></td>
+				<td width="30%" align="right"><a href=# >User profile </a></td>
+			</tr>
+		</table>
+	</div>
+	
+	<hr />
+	<table>
+	<tr>
+	<td class="intro" width="15%">
+	<div id='leftDiv' class="navDiv">
+		<table>
+			<tr class="intro1">
+				<td height="50"><a href=# id="createBlog">Create Blog</a></td>
+			</tr>
+			<tr>
+				<td height="50"><a href=# >Favorite hashtag 1</a></td>
+			</tr>
+			<tr>
+				<td height="50"><a href=# >Favorite hashtag 2</a></td>
+			</tr>
+			<tr>
+				<td height="50"height="50"><a href=# >Favorite hashtag 3</a></td>
+			</tr>
+		</table>
+	</div>
+	</td>
+	<td>
+	<div  id='centerDiv' >
+	<ul class=mylist style="list-style: none">
+	</ul>
+		
+	</div>
+	
+	<div  id='centerDiv1' >
+		<table>
+			<tr>
+				<td >Title:</td>
+				<td><textarea name='title' rows="1" cols="100"></textarea></td>
+			</tr>
+			<tr>
+				<td>Body:</td>
+				<td><textarea name='body' rows="15" cols="100"></textarea></td>
+			</tr>
+			<tr>
+				<td>Tags:</td>
+				<td><textarea name='hashTag' rows="2" cols="100"></textarea></td>
+				
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><button id="submit">Submit</button>
+				<button id="cancel">Cancel</button></td>
+			</tr>
+		
+		</table>
+	</div>
+	
+	<div  id='centerDiv3' >
+		<table>
+			<tr>
+				<td >Title:</td>
+				<td><h3 id='title3' ></h3></td>
+			</tr>
+			<tr>
+				<td>Body:</td>
+				<td><label id='body3' rows="15" cols="100"></label></td>
+			</tr>
+			<tr>
+				<td>Tags:</td>
+				<td><label id='hashTag3' rows="2" cols="100"></label></td>
+				
+			</tr>
+		
+		</table>
+	</div>
+	</td>
+	</tr>
+	
+	</table>
+	
+	
+</body>
+</html>

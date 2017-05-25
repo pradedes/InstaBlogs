@@ -1,10 +1,10 @@
 package com.instablog.data;
 
+import java.util.List;
+
 import com.instablog.api.entity.User;
-import com.instablog.api.exception.AuthorizationFailedException;
 import com.instablog.api.exception.BloggingException;
 import com.instablog.api.exception.DuplicateUserIdException;
-import com.instablog.api.exception.NoUserIdFoundException;
 
 public interface UserDAO {
 
@@ -17,6 +17,6 @@ public interface UserDAO {
 	
 	public User read(String userId) throws BloggingException;
 	
-	
+	public List<User> getAll() throws BloggingException;
 
 }

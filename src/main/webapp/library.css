@@ -1,0 +1,33 @@
+
+
+
+
+td[type=text],input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.navDiv{
+	
+    top:0;
+    left:0;
+   
+	
+}
+
+.intro { 
+
+    background-color: #dffbf9;
+     padding: 12px 20px;
+      border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.intro1{ 
+	
+    background-image: bg.jpg;
+}
