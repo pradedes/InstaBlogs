@@ -12,7 +12,7 @@ $(document).ready(function() {
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
 		statusCode: {
-		      204:function() {}
+		      204:function() {alert("no data found");}
 		},
 		success : function(data,jqXHR) {
 			var clist = $('ul.mylist');
