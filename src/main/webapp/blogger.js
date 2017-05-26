@@ -4,6 +4,7 @@ $(document).ready(function() {
 	
 	
 	function reload(){
+		//alert("load");
 		$.ajax({
 		
 		
@@ -11,9 +12,6 @@ $(document).ready(function() {
 		type : 'get',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
-		statusCode: {
-		      204:function() {alert("no data found");}
-		},
 		success : function(data,jqXHR) {
 			var clist = $('ul.mylist');
 			$('ul.mylist').empty();
@@ -43,6 +41,7 @@ $(document).ready(function() {
 			 var div=   $("<div/>") 
 			    	.addClass('w3-card-4')
 			    	.click(function(e){
+			    		//alert("calling view");
 		    		$("#listingCard").hide(),
 		    		$("#viewCard").show(),
 		    	
@@ -118,7 +117,7 @@ $(document).ready(function() {
 				$("#userName").text(data.userName);
 				$("#userEmail").text(data.email);
 				$("#userDetails").show();
-				alert(userProfile.userLoginId);
+				//alert(userProfile.userLoginId);
 			}
 		}).error(ajaxError);
 	});
