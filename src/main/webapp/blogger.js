@@ -174,7 +174,6 @@ $(document).ready(function() {
 	$("#searchIcon").click(function(e) {
 		
 			var searchStr = $("#search").val();
-			alert(searchStr);
 				$.ajax({
 					url : 'rest/blog?searchStr='+ searchStr,
 					type : 'get',
@@ -319,6 +318,11 @@ $(document).ready(function() {
 			//dataType : 'json',
 			contentType: "application/json; charset=utf-8",
 			data : JSON.stringify(blog),
+			 beforeSend: function(xhr) {
+				 	 if(window.sessionStorage) { 
+				 		xhr.setRequestHeader('Authorization', sessionStorage.getItem("Authorization"));
+		               }
+		      },
 			success : function() {
 				$("#blogCard").hide();
 				$("#listingCard").show();
@@ -443,7 +447,6 @@ $(document).ready(function() {
 			contentType : 'application/json; charset=utf-8',
 			data : JSON.stringify(user),
 			success : function(result, status, xhr) {
-				alert("user added");
 				$("#signUpCard").hide();
 				$("#signCard").hide();
 				$("#welcomeCard").show();
