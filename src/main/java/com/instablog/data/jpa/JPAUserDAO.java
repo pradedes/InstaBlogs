@@ -18,7 +18,6 @@ public class JPAUserDAO implements UserDAO {
 	@Override
 	public void create(User user) {
 		EntityManager em = factory.createEntityManager();
-		System.out.println("JPAUserDAO.create()");
 		em.getTransaction().begin();
 		em.persist(user);
 		em.getTransaction().commit();
