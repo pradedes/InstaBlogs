@@ -1,9 +1,13 @@
-package com.instablog.api.entity;
+package com.instablog.api.entity.jpa;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u ORDER BY u.userLoginId DESC"), })
 public class User {
 
 	public static final String FIND_ALL = "User.findAll";
@@ -15,14 +19,18 @@ public class User {
 	private String userLoginId;
 
 
+	@Column(name = "FULL_NAME")
 	private String fullName;
 
 	// private boolean isAdmin;
+	@Column(name = "E_MAIL")
 	private String email;
 
 	// @Column("length=256","nonnullable = true")
+	@Column(name = "PWD_HASH")
 	private String password;
 	
+	@Column(name = "SALT")
 	private String salt;
 	
 	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

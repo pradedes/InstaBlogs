@@ -2,18 +2,26 @@ package com.instablog.service;
 
 import java.util.List;
 
+import org.mongodb.morphia.Datastore;
+
 import com.instablog.api.entity.User;
 import com.instablog.api.exception.AuthorizationFailedException;
 import com.instablog.api.exception.BloggingException;
 import com.instablog.api.exception.DuplicateUserIdException;
 import com.instablog.api.exception.NoUserIdFoundException;
 import com.instablog.data.UserDAO;
+import com.instablog.data.UserMongoDao;
 import com.instablog.data.jpa.JPAUserDAO;
+import com.instablog.util.MongoUtil;
 import com.instablog.util.PasswordHelper;
 
 public class UserServiceImpl implements UserService {
 
-	UserDAO dao = new JPAUserDAO();
+	static UserDAO dao = null;//new JPAUserDAO();
+	static{
+		Datastore ds = MongoUtil.initMongo();
+		dao = new UserMongoDao(User.class, ds);
+	}
 
 	@Override
 	public void authenticate(String userLoginId, String pwd)

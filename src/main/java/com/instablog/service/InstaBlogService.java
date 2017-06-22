@@ -2,17 +2,26 @@ package com.instablog.service;
 
 import java.util.List;
 
+import org.mongodb.morphia.Datastore;
+
 import com.instablog.api.entity.Blog;
 import com.instablog.api.exception.BloggingException;
 import com.instablog.api.exception.NoBlogFoundException;
 import com.instablog.data.BlogDAO;
-import com.instablog.data.InstaBlogDao;
+import com.instablog.data.InstaBlogMongoDao;
 import com.instablog.util.BloggingConstants;
+import com.instablog.util.MongoUtil;
 
 public class InstaBlogService implements BlogService {
 	
-	BlogDAO blogDao = new InstaBlogDao();
+	private static BlogDAO blogDao;
 
+
+	//BlogDAO blogDao = new InstaBlogDao();
+	static{
+		Datastore dataStore = MongoUtil.initMongo();
+		 blogDao = new InstaBlogMongoDao(Blog.class, dataStore);
+	}
 	@Override
 	public void postBlog(Blog b) throws BloggingException {
 		blogDao.create(b);

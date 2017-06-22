@@ -1,29 +1,45 @@
-package com.instablog.api.entity;
+package com.instablog.api.entity.jpa;
 
 import java.util.Date;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.instablog.util.BloggingConstants;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = BloggingConstants.FIND_ALL, query = "SELECT b FROM Blog b") ,
+@NamedQuery(name = BloggingConstants.FIND_BY_BLOGID, query = "SELECT b FROM Blog b where b.blogId=:blogId"),
+@NamedQuery(name = BloggingConstants.FIND_BY_BLOGGERID, query = "SELECT b FROM Blog b where b.noOfviews=:bloggerId"),
+@NamedQuery(name = BloggingConstants.FIND_BY_BLOGGERCONTENT, query = "SELECT b from Blog b where b.blogBody like :searchString")})
 public class Blog {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int blogId;
+	
+	
 	
 	private String blogTitle;
 	
+	@Column(length=5000)
 	private String blogBody;
 	
 	
 	private String noOfviews;
 	
-	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date blogCreatedDate;
 	
-	
+	@ManyToOne
 	private User user;
 	
 /*	 @ElementCollection(targetClass=String.class)

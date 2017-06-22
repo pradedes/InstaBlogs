@@ -7,7 +7,7 @@ import com.instablog.data.InstaCommentDao;
 
 public class InstaCommentService implements CommentService {
 	
-	CommentDAO commentDao = new InstaCommentDao();
+	CommentDAO commentDao = null;//new InstaCommentDao();
 
 	@Override
 	public void postComment(Comment c) throws BloggingException {

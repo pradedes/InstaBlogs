@@ -1,16 +1,19 @@
-package com.instablog.api.entity;
+package com.instablog.api.entity.jpa;
 
 import java.util.Date;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-
-
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Comment {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int commentId;
 	
 	private int bloggerId;
