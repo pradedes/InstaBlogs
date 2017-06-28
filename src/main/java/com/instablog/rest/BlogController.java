@@ -77,7 +77,9 @@ public class BlogController {
 		System.out.println("searchStr" +  searchStr);
 		GenericEntity<List<Blog>> entity = null;
 		if(searchStr != null){
+			System.out.println("BlogController.searchInContentQ()");
 			List<Blog> blog = (List<Blog>)blogService.searchBlog(BloggingConstants.SEARCH_BY_BLOG_CONTENT, -1, searchStr);
+			System.out.println("BlogController.searchInContentQ()");
 			entity = new GenericEntity<List<Blog>>(blog) {};
 		} else {
 			List<Blog> blog = blogService.searchBlog(BloggingConstants.SEARCH_ALL_BLOGS, -1, null);

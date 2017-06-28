@@ -143,7 +143,7 @@ $(document).ready(function() {
 			success : function(data, textStatus, request) {
 				$("#loginCard").hide();
 				$("#signCard").hide();
-				$("#welcomeCard").show();
+				
 				$("#navCard").show();
 				userData = data;
 		
@@ -152,7 +152,9 @@ $(document).ready(function() {
 				//alert(request.getResponseHeader('Authorization'));
                 if(window.sessionStorage) { 
                     sessionStorage.setItem("Authorization", request.getResponseHeader('Authorization'));
+                    sessionStorage.setItem("UserID", data.userLoginId);
                 }
+                $("#welcomeCard").show();
 			},
 			statusCode: {
 			      401:function() {$("#loginError").show();}
@@ -164,6 +166,8 @@ $(document).ready(function() {
 	
 	$("#createBlog").click(function(e) {
 		event.preventDefault();
+		$("#title").val("");
+		$("#body").val("");
 		$("#blogCard").show();
 		$("#listingCard").hide();
 		
@@ -448,17 +452,20 @@ $(document).ready(function() {
 			success : function(result, status, xhr) {
 				$("#signUpCard").hide();
 				$("#signCard").hide();
-				$("#welcomeCard").show();
+				//$("#welcomeCard").show();
 				$("#navCard").show();
 			//	alert(result.userLoginId);
 				userData=result;
 				
-				$("<b/>").text("Welcome " +result.userLoginId).appendTo($("#welcomeLabel"));
+				//$("<b/>").text("Welcome " +result.userLoginId).appendTo($("#welcomeLabel"));
 				//$("#welcomeLabel").text("Welcome " +data.userName);
 			//	alert(xhr.getResponseHeader('Authorization'));
                 if(window.sessionStorage) { 
                     sessionStorage.setItem("Authorization", xhr.getResponseHeader('Authorization'));
+                    sessionStorage.setItem("UserID", result.userLoginId);
+                    
                 }
+                $("#welcomeCard").show();
 			}
 		}).error(ajaxError);
 	});

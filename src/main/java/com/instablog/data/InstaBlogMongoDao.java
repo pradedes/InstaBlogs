@@ -3,9 +3,9 @@ package com.instablog.data;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
-import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.QueryResults;
 
 import com.instablog.api.entity.Blog;
@@ -16,6 +16,7 @@ import com.instablog.util.BloggingConstants;
 
 public class InstaBlogMongoDao extends BasicDAO<Blog, Integer> implements BlogDAO {
 
+	private static long blogId = System.currentTimeMillis();
 	private Datastore dataStore;
 
 	public InstaBlogMongoDao(Class<Blog> entityClass, Datastore ds) {
@@ -25,7 +26,11 @@ public class InstaBlogMongoDao extends BasicDAO<Blog, Integer> implements BlogDA
 
 	@Override
 	public void create(Blog b) throws BloggingException {
-		this.save(b);
+		ObjectId _id = new ObjectId();
+		System.out.println("InstaBlogMongoDao.create()");
+		System.out.println(_id.toString());
+		b.setBlogId(blogId);
+		save(b);
 	}
 
 	@Override
@@ -41,27 +46,25 @@ public class InstaBlogMongoDao extends BasicDAO<Blog, Integer> implements BlogDA
 
 	@Override
 	public List<Blog> read(Object payload) throws NoBlogFoundException, BloggingException {
-		
-		String queryType = ((InstaBlogPayload)payload).getQueryType();
-		 QueryResults<Blog> query =null;
-		
-		 if(queryType.equals(BloggingConstants.FIND_BY_BLOGGERCONTENT)){
-				String queryString = ((InstaBlogPayload)payload).getSearchString();
-				
-				Document doc = new Document("blogTitle", queryString);
-				 query  = createQuery().field("blogTitle").contains(queryString);
-				
-		}else if(queryType.equals(BloggingConstants.FIND_ALL)){
-			
-			
-			 query  = this.find();
-					 }
-		 if(query == null){
-			 throw new BloggingException();
-		 }
+
+		String queryType = ((InstaBlogPayload) payload).getQueryType();
+		QueryResults<Blog> query = null;
+
+		if (queryType.equals(BloggingConstants.FIND_BY_BLOGGERCONTENT)) {
+			String queryString = ((InstaBlogPayload) payload).getSearchString();
+
+			Document doc = new Document("blogBody", queryString);
+			query = createQuery().field("blogBody").containsIgnoreCase(queryString);
+
+		} else if (queryType.equals(BloggingConstants.FIND_ALL)) {
+
+			query = this.find();
+		}
+		System.out.println("InstaBlogMongoDao.read( ) " + query.count());
+		if (query == null || query.count() == 0) {
+			throw new NoBlogFoundException();
+		}
 		return query.asList();
 	}
-
-	
 
 }

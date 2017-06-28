@@ -14,8 +14,9 @@ public class ApplicationExceptionMapper implements ExceptionMapper<Throwable>{
 
 	@Override
 	public Response toResponse(Throwable exception) {
+		System.out.println("ApplicationExceptionMapper.toResponse()"); exception.printStackTrace();
         if (exception instanceof NoBlogFoundException) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.noContent().build();
         } else if (exception instanceof DuplicateUserIdException){
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } else if (exception instanceof AuthorizationFailedException) {

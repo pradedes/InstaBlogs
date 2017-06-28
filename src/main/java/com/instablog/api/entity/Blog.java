@@ -11,7 +11,7 @@ import com.instablog.util.BloggingConstants;
 public class Blog {
 
 	@Id
-	private int blogId;
+	private long blogId;
 	
 	private String blogTitle;
 	
@@ -29,12 +29,12 @@ public class Blog {
 /*	 @ElementCollection(targetClass=String.class)
 	private List<String> blogHashTags;*/
 
-	public int getBlogId() {
+	public long getBlogId() {
 		return blogId;
 	}
 
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
+	public void setBlogId(long blogId2) {
+		this.blogId = blogId2;
 	}
 
 	public String getBlogTitle() {
