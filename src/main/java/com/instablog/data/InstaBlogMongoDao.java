@@ -16,7 +16,6 @@ import com.instablog.util.BloggingConstants;
 
 public class InstaBlogMongoDao extends BasicDAO<Blog, Integer> implements BlogDAO {
 
-	private static long blogId = System.currentTimeMillis();
 	private Datastore dataStore;
 
 	public InstaBlogMongoDao(Class<Blog> entityClass, Datastore ds) {
@@ -29,7 +28,7 @@ public class InstaBlogMongoDao extends BasicDAO<Blog, Integer> implements BlogDA
 		ObjectId _id = new ObjectId();
 		System.out.println("InstaBlogMongoDao.create()");
 		System.out.println(_id.toString());
-		b.setBlogId(blogId);
+		b.setBlogId(this.find().count());
 		save(b);
 	}
 
